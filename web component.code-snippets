@@ -1,0 +1,79 @@
+{
+	// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+	"Web Component JS Template":{
+		"scope": "javascript",
+		"prefix": "Web Component JS Template",
+		"body": [
+				"const template = document.createElement('template');",
+				"template.innerHTML = `",
+    			"<style>",
+    			"</style>", 
+				"",
+    			"<div class=\"user-card\">",
+				"\t<img />",
+        		"\t<div>",
+            	"\t\t<h3></h3>",
+            	"\t\t<div class=\"info\">",
+                "\t\t\t<p><slot name=\"email\" /></p>",
+                "\t\t\t<p><slot name=\"phone\" /></p>",
+            	"\t\t</div>",
+            	"\t\t<button id=\"toggle-info\">Hide Info</button>",
+        		"\t</div>",
+    			"</div>",
+				"`;",
+				"",
+				"class UserCard extends HTMLElement{",
+					"\tconstructor(){",
+						"\t\tsuper();",
+						"",
+						"\t\tthis.attachShadow({mode: 'open' });",
+						"\t\tthis.shadowRoot.appendChild(template.content.cloneNode(true));",
+						"\t\tthis.shadowRoot.querySelector('h3').innerText = this.getAttribute('name');",
+						"\t\tthis.shadowRoot.querySelector('img').src = this.getAttribute('avatar');",
+					"\t}",
+				"",
+				"\ttoggleCollapse() {",
+				"\t}",
+				"",
+				"\tconnectedCallback() {",
+					"\t\tthis.shadowRoot.querySelector('#Collapse').addEventListener('click', () => this.toggleCollapse());",
+				"\t}",
+				"",
+				"\tdisconnectedCallback() {",
+					"\t\tthis.shadowRoot.querySelector('#Collapse').removeEventListener();",
+				"\t}",
+				"}",
+				"",
+				"window.customElements.define('user-card', UserCard);",
+		],
+		"description": "Creates a web component template for JS"
+
+	},
+		"Web Component HTML Template":{
+		"scope": "html",
+		"prefix": "Web Component HTML Template",
+		"body": [
+				"<user-card name=\"John Doe\" avatar=\"https://randomuser.me/api/portraits/men/1.jpg\">",
+				"\t<div slot=\"email\">johndoe@gmail.com</div>",
+				"\t<div slot=\"phone\">555-555-5555</div>",
+				"</user-card>",
+		],
+		"description": "Creates a web component template for HTML"
+	}
+}
